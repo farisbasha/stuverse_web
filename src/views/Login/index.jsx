@@ -50,7 +50,7 @@ const Login = () => {
 
         <form id="login-form"  className="flex flex-col gap-2 w-full" onSubmit={handleSubmit(onSubmit)} >
           <Input isRequired size='md' variant="bordered" label="Email" placeholder='Enter your email' {...register("email")} isInvalid={errors.email ? true:false} errorMessage={errors.email?.message} />
-          <Input isRequired size='md' variant="bordered" label="Password" placeholder='Enter your password' {...register("password")} isInvalid={errors.password ? true:false}  errorMessage={errors.password?.message}/>
+          <Input isRequired size='md' variant="bordered" label="Password" placeholder='Enter your password' {...register("password")} isInvalid={errors.password ? true:false}  errorMessage={errors.password?.message} type='password'/>
         </form>
 
         <Button isLoading={authState.status === "loading"}  type='submit' form='login-form'  color="primary" size="md" className='w-full mt-2' >Login</Button>

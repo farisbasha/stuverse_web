@@ -29,6 +29,18 @@ const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
+        logout: (state) => {
+            state.user = null
+            localStorage.removeItem("user")
+        },
+        loadUser: (state) => {
+           const user = JSON.parse(localStorage.getItem("user"))
+           if(user){
+            state.user = user
+           }
+           state.status = "success"
+        },
+    
     },
     extraReducers: (builder) => {
         builder
@@ -38,11 +50,14 @@ const authSlice = createSlice({
             .addCase(loginWithEmailPassword.fulfilled, (state, action) => {
                 state.status = "success"
                 state.user = action.payload
+                localStorage.setItem("user", JSON.stringify(action.payload))
             })
             .addCase(loginWithEmailPassword.rejected, (state) => {
                 state.status = "failed"
             })
     }
 })
+
+export const {logout,loadUser} = authSlice.actions
 
 export default authSlice.reducer
